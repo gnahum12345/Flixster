@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -56,13 +57,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         viewHolder.tvTitle.setText(movie.getTitle());
         viewHolder.tvOverview.setText(movie.getOverview());
 
-        //build url for poster image
+        // build url for poster image
         String imageURL = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
         // load image using glide
-        Glide.with(context)
-                .load(imageURL )
-                .placeholder(R.drawable.flicks_movie_placeholder)
+//        Glide.with(context)
+//                .load(imageURL )
+//                .bitmapTransform()
+//                .placeholder(R.drawable.flicks_movie_placeholder)
+//                .error(R.drawable.flicks_movie_placeholder)
+//                .into(viewHolder.ivPosterImage);
+        Glide.with(viewHolder.itemView)
+                .load(imageURL)
+                .apply(RequestOptions.placeholderOf(R.drawable.flicks_movie_placeholder)
                 .error(R.drawable.flicks_movie_placeholder)
+                .fitCenter())
                 .into(viewHolder.ivPosterImage);
     }
 
