@@ -1,10 +1,14 @@
 package me.gnahum12345.flixster;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -62,6 +66,23 @@ public class MovieListActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rvMovies.setLayoutManager(manager);
         rvMovies.setAdapter(adapter);
+
+//        rvMovies.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+//            @Override
+//            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+//                Toast.makeText(getApplicationContext(), "some event was touched", Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean b) {
+//
+//            }
+//        });
         // get the configuration on app creation.
         getConfigurations();
     }
@@ -165,5 +186,44 @@ public class MovieListActivity extends AppCompatActivity {
         if (alertUser) {
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.moviesOption).setVisible(false);
+        getSupportActionBar().setTitle(getSupportActionBar().getTitle() + ": " + getString(R.string.moviesOptionMenu));
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        Toast toast = Toast.makeText(getApplicationContext(),"Option 1", Toast.LENGTH_SHORT);
+
+
+        switch(item.getItemId()){
+            case R.id.tvShowsOption:
+                toast.setText("TV Show");
+                toast.show();
+                return true;
+
+            case R.id.productionOption:
+                toast.setText("Production Show");
+                toast.show();
+                return true;
+            case R.id.peopleOption:
+                toast.setText("People");
+                toast.show();
+                return true;
+            default:
+                toast.setText("Default");
+                toast.show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

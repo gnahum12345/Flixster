@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ivPosterImage"
         android:layout_width="95dp"
         android:layout_height="135dp"
+        android:layout_marginRight="15dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:srcCompat="@android:color/black" />
@@ -14,8 +16,9 @@
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="289dp"
-        android:layout_height="105dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:textColor="@color/white"
         android:layout_below="@+id/tvTitle"
         android:text="Movie overview and synposis" />
 
@@ -24,6 +27,7 @@
         android:layout_width="289dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:textColor="@color/white"
         android:layout_toEndOf="@+id/ivPosterImage"
         android:text="Movie Title"
         android:textAppearance="@android:style/TextAppearance.Large" />

@@ -63,12 +63,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         // build url for poster image
         String imageURL = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
         // load image using glide
-//        Glide.with(context)
-//                .load(imageURL )
-//                .bitmapTransform()
-//                .placeholder(R.drawable.flicks_movie_placeholder)
-//                .error(R.drawable.flicks_movie_placeholder)
-//                .into(viewHolder.ivPosterImage);
         Glide.with(viewHolder.itemView)
                 .load(imageURL)
                 .apply(RequestOptions.placeholderOf(R.drawable.flicks_movie_placeholder)
@@ -100,6 +94,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle = itemView.findViewById(R.id.tvTitle);
         }
     }
+
 
 
 }

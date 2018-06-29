@@ -2,5 +2,8 @@
     <string name="app_name">Flixster</string>
     <string name="API_KEY">880e01983769972bf92770be3088063e</string>
     <!--<string name="API_KEY">a07e22bc18f5cb106bfe4cc1f83ad8ed</string>-->
-    <string name="API_Read_Access_Token"></string>
+    <string name="moviesOptionMenu">Movies</string>
+    <string name="tvShowsOptionMenu">TV Shows</string>
+    <string name="productionOptionMenu">Production</string>
+    <string name="peopleOptionsMenu">People</string>
 </resources>
