@@ -1,6 +1,6 @@
 package me.gnahum12345.flixster;
 
-import android.support.annotation.NonNull;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -39,7 +38,7 @@ public class MovieListActivity extends AppCompatActivity {
 
     //image config
     Config config;
-
+    String setting = "Movies";
     // TAG
     private final String TAG = "DEBUGGINGHAHAHAHAHA";
 
@@ -67,36 +66,72 @@ public class MovieListActivity extends AppCompatActivity {
         rvMovies.setLayoutManager(manager);
         rvMovies.setAdapter(adapter);
 
-//        rvMovies.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//            @Override
-//            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-//                Toast.makeText(getApplicationContext(), "some event was touched", Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onRequestDisallowInterceptTouchEvent(boolean b) {
-//
-//            }
-//        });
+
         // get the configuration on app creation.
         getConfigurations();
     }
 
-    private void getNowPlaying() {
+
+    private void getNowPlayingTVShows() {
+        String url = API_BASE_URL + "/tv/popular";
+        RequestParams params = new RequestParams();
+        params.put(API_KEY_PARAM, getString(R.string.API_KEY)); //API key, always requires.
+
+        client.get(url, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                ArrayList<Movie> notTVShows = new ArrayList<>();
+                notTVShows.addAll(movies);
+                try {
+                    JSONArray results = response.getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        Log.i(TAG, results.get(0).toString());
+                        Movie movie = new Movie(results.get(i));
+                        movies.add(movie);
+                        // notify adapter that a row was added
+                        adapter.notifyItemInserted(movies.size() - 1);
+                    }
+                    movies.removeAll(notTVShows);
+                    adapter.notifyDataSetChanged();
+                    Log.i(TAG, String.format("\n\n\n\\n\nLoading %s movies", results.length()));
+                } catch (JSONException e) {
+                    logError("Failed to parse popular tv shows", e, true);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.i(TAG,"\n\n\nFailed to get the data from now_playing endpoint 1 ");
+                Toast.makeText(getApplicationContext(), "TV Shows failed to load", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                Log.i(TAG,"\n\n\nFailed to get the data from now_playing endpoint 1 ");
+                Toast.makeText(getApplicationContext(), "TV Shows failed to load", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.i(TAG,"\n\n\nFailed to get the data from now_playing endpoint 1 ");
+                Toast.makeText(getApplicationContext(), "TV Shows failed to load", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void getNowPlayingMovies() {
         // create the URL
         String url = API_BASE_URL + "/movie/now_playing";
         // Set the request parameters
         RequestParams params =  new RequestParams();
         params.put(API_KEY_PARAM, getString(R.string.API_KEY)); //API key, always requires.
         //execute the GET Request.
+
         client.get(url, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                ArrayList<Movie> notTVShows = new ArrayList<>();
+                notTVShows.addAll(movies);
                 try {
                     JSONArray results = response.getJSONArray("results");
 
@@ -106,6 +141,8 @@ public class MovieListActivity extends AppCompatActivity {
                         // notify adapter that a row was added
                         adapter.notifyItemInserted(movies.size() - 1);
                     }
+                    movies.removeAll(notTVShows);
+                    adapter.notifyDataSetChanged();
                     Log.i(TAG, String.format("\n\n\n\\n\nLoading %s movies", results.length()));
                 } catch (JSONException e) {
                     logError("Failed to parse now playing movies", e, true);
@@ -151,7 +188,7 @@ public class MovieListActivity extends AppCompatActivity {
                            config.getPosterSize()));
                    //pass to adapter.
                    adapter.setConfig(config);
-                   getNowPlaying();
+                   getNowPlayingMovies();
                } catch (JSONException e) {
                    logError("Failed parsing configuration", e, true);
                }
@@ -171,7 +208,9 @@ public class MovieListActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.i(TAG,"\n\n\nFailed to get the data from config endpoint 3 ");
                 Log.i(TAG, throwable.getMessage());
-                Log.i(TAG, errorResponse.toString());
+                if (errorResponse != null) {
+                    Log.i(TAG, errorResponse.toString());
+                }
             }
 
 
@@ -192,8 +231,8 @@ public class MovieListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.moviesOption).setVisible(false);
         getSupportActionBar().setTitle(getSupportActionBar().getTitle() + ": " + getString(R.string.moviesOptionMenu));
+
         return true;
     }
 
@@ -206,19 +245,34 @@ public class MovieListActivity extends AppCompatActivity {
 
 
         switch(item.getItemId()){
-            case R.id.tvShowsOption:
-                toast.setText("TV Show");
-                toast.show();
-                return true;
+            case R.id.tvShowsToggleOption:
+                if (setting.equals("Movies")) {
+                    setting = "TV Show";
+                    toast.setText("TV Show");
+                    toast.show();
+                    getNowPlayingTVShows();
+                    getSupportActionBar().setTitle(String.format("Flixster: %s", item.getTitle()));
+                } else {
+                    setting = "Movies";
+                    toast.setText("Movies");
+                    toast.show();
+                    getNowPlayingMovies();
+                    getSupportActionBar().setTitle(String.format("Flixster: Movies"));
 
-            case R.id.productionOption:
-                toast.setText("Production Show");
-                toast.show();
+                }
                 return true;
-            case R.id.peopleOption:
-                toast.setText("People");
-                toast.show();
-                return true;
+//            case R.id.searchMenuItem:
+//                toast.setText("SEARCH");
+//                toast.show();
+//                return true;
+//            case R.id.productionOption:
+//                toast.setText("Production Show");
+//                toast.show();
+//                return true;
+//            case R.id.peopleOption:
+//                toast.setText("People");
+//                toast.show();
+//                return true;
             default:
                 toast.setText("Default");
                 toast.show();

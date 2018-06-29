@@ -12,9 +12,9 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-* [ ] For each movie displayed, user can see the following details:
+* [x] For each movie displayed, user can see the following details:
   * [x] Title, Poster Image, Overview (Portrait mode)
-  * [ ] Title, Backdrop Image, Overview (Landscape mode)
+  * [x] Title, Backdrop Image, Overview (Landscape mode)
 * [x] Display a nice default [placeholder graphic](https://guides.codepath.com/android/Displaying-Images-with-the-Glide-Library#advanced-usage) for each image during loading
 * [ ] Allow user to view details of the movie including ratings and popularity within a separate activity
 * [x] Improved the user interface by experimenting with styling and coloring.
@@ -24,10 +24,9 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
-* [x] Have options for TV Series, and Production and People 
-* [ ] Filter by top Movies, TV Series, People, Production Companies
-* [ ] search for movies. 
+* [ ] List anything else that you can get done to improve the app functionality! 
+* [x] Filter by top Movies, TV Series
+* [ ] search 
 * [ ] Picture-in-Picture video *** BIG Goal.
 ## Video Walkthrough
 

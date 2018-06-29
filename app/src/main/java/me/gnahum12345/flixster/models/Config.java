@@ -13,6 +13,11 @@ public class Config {
     // the poster size to use when fetching images/
     String posterSize;
 
+
+
+    String backdropSize;
+
+
     public Config(JSONObject object) throws JSONException {
         JSONObject images = object.getJSONObject("images");
         // get image base url
@@ -21,6 +26,10 @@ public class Config {
         JSONArray posterSizeOptions = images.getJSONArray(POSTER_SIZES);
         // user the option at index 3 or w342 as a fallback
         posterSize = posterSizeOptions.optString(3, "w342");
+        //parse the backdrop sizes and use the option at index 1
+        JSONArray backdropSizeOptions = images.getJSONArray("backdrop_sizes");
+        backdropSize = backdropSizeOptions.optString(1, "w780");
+
     }
 
     // helper method to construct URLs
@@ -33,5 +42,8 @@ public class Config {
 
     public String getPosterSize() {
         return posterSize;
+    }
+    public String getBackdropSize() {
+        return backdropSize;
     }
 }

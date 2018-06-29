@@ -4,25 +4,35 @@
     tools:context=".MovieListActivity">
 
     <item
-        android:id="@+id/moviesOption"
-        android:title="@string/moviesOptionMenu"
+        android:id="@+id/searchMenuItem"
+        android:icon="@drawable/ic_search_black_24dp"
         android:orderInCategory="100"
+        android:title="Search"
         app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/moviesOption"-->
+        <!--android:title="@string/moviesOptionMenu"-->
+        <!--android:orderInCategory="101"-->
+        <!--app:showAsAction="always" />-->
 
     <item
-        android:id="@+id/tvShowsOption"
+        android:id="@+id/tvShowsToggleOption"
         android:title="@string/tvShowsOptionMenu"
         android:orderInCategory="0"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/productionOption"
-        android:title="@string/productionOptionMenu"
-        android:orderInCategory="0"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/peopleOption"
-        android:title="@string/peopleOptionsMenu"
-        app:showAsAction="never"/>
+        android:icon="@drawable/movies"
+        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/resetOption"-->
+        <!--android:icon="@drawable/home"-->
+        <!--app:showAsAction="always"-->
+       <!--/>     &lt;!&ndash;<item&ndash;&gt;-->
+        <!--android:id="@+id/productionOption"-->
+        <!--android:title="@string/productionOptionMenu"-->
+        <!--android:orderInCategory="0"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/peopleOption"-->
+        <!--android:title="@string/peopleOptionsMenu"-->
+        <!--app:showAsAction="never"/>-->
 
 </menu>
