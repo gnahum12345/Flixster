@@ -1,6 +1,7 @@
 package me.gnahum12345.flixster;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.TransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.gnahum12345.flixster.models.Config;
 import me.gnahum12345.flixster.models.Movie;
 
@@ -69,8 +72,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         Glide.with(viewHolder.itemView)
                 .load(imageURL)
                 .apply(RequestOptions.placeholderOf(R.drawable.flicks_movie_placeholder)
-                .error(R.drawable.flicks_movie_placeholder)
-                .fitCenter())
+                        .error(R.drawable.flicks_movie_placeholder)
+                        .fitCenter())
+                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(15, 0)))
                 .into(viewHolder.ivPosterImage);
     }
 

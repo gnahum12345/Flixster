@@ -17,8 +17,7 @@
         android:layout_height="105dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/tvTitle"
-        android:text="Movie overview and syposis" />
-        <!--android:textAppearance="@android:style/TextAppearance.Material.Small"-->
+        android:text="Movie overview and synposis" />
 
     <TextView
         android:id="@+id/tvTitle"
