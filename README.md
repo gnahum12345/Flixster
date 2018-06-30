@@ -27,7 +27,8 @@ The following **additional** features are implemented:
 * [x] List anything else that you can get done to improve the app functionality! 
 * [x] Filter by top TV shows
 * [x] Details of top TV Shows including ratings. 
-
+* [x] changed the ActionBar title 
+* [x] added an ActionBarItem 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
