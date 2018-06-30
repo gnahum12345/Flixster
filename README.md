@@ -16,7 +16,7 @@ The following **optional** features are implemented:
   * [x] Title, Poster Image, Overview (Portrait mode)
   * [x] Title, Backdrop Image, Overview (Landscape mode)
 * [x] Display a nice default [placeholder graphic](https://guides.codepath.com/android/Displaying-Images-with-the-Glide-Library#advanced-usage) for each image during loading
-* [ ] Allow user to view details of the movie including ratings and popularity within a separate activity
+* [x] Allow user to view details of the movie including ratings and popularity within a separate activity
 * [x] Improved the user interface by experimenting with styling and coloring.
 * [x] Apply rounded corners for the poster or background images using [Glide transformations](https://guides.codepath.com/android/Displaying-Images-with-the-Glide-Library#transformations)
 * [ ] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
@@ -24,10 +24,10 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality! 
-* [x] Filter by top Movies, TV Series
-* [ ] search 
-* [ ] Picture-in-Picture video *** BIG Goal.
+* [x] List anything else that you can get done to improve the app functionality! 
+* [x] Filter by top TV shows
+* [x] Details of top TV Shows including ratings. 
+
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:

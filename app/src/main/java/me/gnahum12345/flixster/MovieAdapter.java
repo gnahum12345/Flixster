@@ -68,11 +68,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 Intent intent = new Intent(context, DetailActivity.class );
                 intent.putExtra("title", movie.getTitle());
                 intent.putExtra("overview", movie.getOverview());
-                intent.putExtra("posterPath", movie.getPosterPath());
+                intent.putExtra("posterSize", config.getPosterSize());
+                intent.putExtra("backdropSize", config.getBackdropSize());
+                intent.putExtra("voterAverage", movie.getVoteAverage());
+                intent.putExtra("baseURL", config.getImageBaseUrl());
                 intent.putExtra("backdropPath", movie.getBackdropPath());
-                Toast.makeText(context, "BYEEEE", Toast.LENGTH_LONG).show();
+                intent.putExtra("posterPath", movie.getPosterPath());
+                Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
-
             }
         });
         // determine current orientation

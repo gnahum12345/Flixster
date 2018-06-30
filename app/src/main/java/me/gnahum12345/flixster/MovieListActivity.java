@@ -244,7 +244,7 @@ public class MovieListActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(),"Option 1", Toast.LENGTH_SHORT);
 
 
-        switch(item.getItemId()){
+        switch(item.getItemId()) {
             case R.id.tvShowsToggleOption:
                 if (setting.equals("Movies")) {
                     setting = "TV Show";
@@ -261,21 +261,6 @@ public class MovieListActivity extends AppCompatActivity {
 
                 }
                 return true;
-//            case R.id.searchMenuItem:
-//                toast.setText("SEARCH");
-//                toast.show();
-//                return true;
-//            case R.id.productionOption:
-//                toast.setText("Production Show");
-//                toast.show();
-//                return true;
-//            case R.id.peopleOption:
-//                toast.setText("People");
-//                toast.show();
-//                return true;
-            default:
-                toast.setText("Default");
-                toast.show();
         }
 
         return super.onOptionsItemSelected(item);

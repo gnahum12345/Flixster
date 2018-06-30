@@ -46,4 +46,8 @@ public class Config {
     public String getBackdropSize() {
         return backdropSize;
     }
+
+    public static String getImageUrl(String size, String path, String baseURL) {
+        return String.format("%s%s%s", baseURL, size, path);
+    }
 }

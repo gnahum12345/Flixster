@@ -3,12 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MovieListActivity">
 
-    <item
-        android:id="@+id/searchMenuItem"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:orderInCategory="100"
-        android:title="Search"
-        app:showAsAction="always" />
+
     <!--<item-->
         <!--android:id="@+id/moviesOption"-->
         <!--android:title="@string/moviesOptionMenu"-->
